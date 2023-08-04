@@ -2,17 +2,14 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ArticleController;
+use App\Models\Article;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
+Route::delete('/article/{article}', [ArticleController::class , 'destroy']);
+Route::post('/article' , [ArticleController::class , 'create']) ;
+Route::get('/article' , [ArticleController::class , 'getArticle']);
+Route::get('/articles' , [ArticleController::class , 'getArticles']);
+Route::put('/article' , [ArticleController::class , 'update']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
