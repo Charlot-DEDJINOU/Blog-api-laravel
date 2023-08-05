@@ -14,7 +14,7 @@ Route::put('/article' , [ArticleController::class , 'update']);
 Route::delete('/commentaire/{commentaire}', [CommentaireController::class , 'destroy']);
 Route::post('/commentaire' , [CommentaireController::class , 'create']) ;
 Route::get('/commentaire/{id}' , [CommentaireController::class , 'getcommentaire']);
-Route::get('/commentaires' , [CommentaireController::class , 'getcommentaires']);
+Route::get('/commentaires/{article_id}' , [CommentaireController::class , 'getcommentaires']);
 Route::put('/commentaire' , [CommentaireController::class , 'update']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

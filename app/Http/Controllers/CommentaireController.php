@@ -48,7 +48,7 @@ class CommentaireController extends Controller
         return response()->json(['message' => "Erreur lors de la mise à jour reussir"],200);
     }
 
-    public function destroy($commentaire)
+    public function destroy(Commentaire $commentaire)
     {
         if(!$commentaire)
             return response()->json(['message' => "Commentaire n\'existe"],200);
@@ -71,7 +71,7 @@ class CommentaireController extends Controller
 
     public function getCommentaires($article_id)
     {
-        $commentaires = Commentaire::where('article_id',$article_id);
+        $commentaires = Commentaire::where('article_id',$article_id)->get() ;
 
         return response()->json($commentaires,200);
     }
