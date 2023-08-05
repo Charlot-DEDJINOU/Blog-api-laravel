@@ -11,8 +11,8 @@ class ArticleController extends Controller
     public function create(Request $request)
     {
         $validator = Validator::make($request->all() , [
-            'title' => 'string' ,
-            'content' => 'text'
+            'title' => 'string|required' ,
+            'content' => 'string'
         ]) ;
 
         if($validator->fails()){
@@ -33,7 +33,7 @@ class ArticleController extends Controller
         $validator = Validator::make($request->all() , [
             'id' => 'required',
             'title' => 'string' ,
-            'content' => 'text'
+            'content' => 'string'
         ]) ;
 
         if($validator->fails()){
@@ -54,20 +54,17 @@ class ArticleController extends Controller
             return response()->json(['message' => 'Erreur lors du mise à jour'] , 300);
     }
 
-    public function getArticle(Request $request)
+    public function getArticle($id)
     {
-       $id = $request->query('id') ;
-       if(isset($id))
-        {
-            $article = Article::find($id);
-            if(!$article)
-                return response()->json(['message' => "Cet article n'exite pas"] , 200) ;
-    
-            return response()->json($article,200) ;
+        $article = Article::find($id);
+
+        if (!$article) {
+            return response()->json(['message' => 'Article not found'], 404);
         }
-        else
-            return response()->json(['message' => 'Pas assez de donnée'],422);
+
+        return response()->json($article , 200);
     }
+
 
     public function getArticles()
     {
